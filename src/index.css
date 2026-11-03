@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-sky: #3CB4E6;
+  --color-azure: #2494C9;
+  --color-charcoal: #4A4A4A;
+  --color-grey: #7A7A7A;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+}
+
+:root {
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  color: #4A4A4A;
+  background: #FFFFFF;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 104px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background: #FFFFFF;
+}
+
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  color: #FFFFFF;
+  background: #2494C9;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(60, 180, 230, 0.5);
+  outline-offset: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F7F8;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid #F4F7F8;
+  border-radius: 999px;
+  background: #9CDCF5;
+}
+
+@layer components {
+  .container-wide {
+    width: min(calc(100% - 2rem), 82rem);
+    margin-inline: auto;
+  }
+
+  .section-pad {
+    padding-block: clamp(5rem, 10vw, 9rem);
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-sky px-6 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(60,180,230,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-azure hover:shadow-[0_14px_35px_rgba(36,148,201,0.3)] active:translate-y-0;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-charcoal/15 bg-white px-6 py-3.5 text-sm font-semibold text-charcoal transition-all duration-300 hover:-translate-y-0.5 hover:border-sky hover:text-azure active:translate-y-0;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-sm text-charcoal outline-none transition placeholder:text-grey/60 focus:border-sky focus:ring-4 focus:ring-sky/10;
+  }
+}
+
+.range-input {
+  height: 5px;
+  appearance: none;
+  border-radius: 999px;
+  outline: none;
+  background: linear-gradient(to right, #3CB4E6 0%, #3CB4E6 var(--range-progress), #DCE6EA var(--range-progress), #DCE6EA 100%);
+}
+
+.range-input::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  appearance: none;
+  border: 5px solid #FFFFFF;
+  border-radius: 50%;
+  background: #2494C9;
+  box-shadow: 0 2px 10px rgba(36, 148, 201, 0.35);
+  cursor: grab;
+}
+
+.range-input::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: 5px solid #FFFFFF;
+  border-radius: 50%;
+  background: #2494C9;
+  box-shadow: 0 2px 10px rgba(36, 148, 201, 0.35);
+  cursor: grab;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track.reverse {
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes slow-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+.orbital-ring {
+  animation: slow-spin 26s linear infinite;
+}
+
+.soft-pulse {
+  animation: soft-pulse 5s ease-in-out infinite;
+}
+
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(36, 148, 201, 0.17);
+}
+
+.book-shadow {
+  box-shadow: -22px 28px 50px rgba(0, 0, 0, 0.28), inset -8px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .container-wide {
+    width: min(calc(100% - 4rem), 82rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-pad {
+    padding-block: 4.75rem;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 1023px) {
+  .story-visual {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
